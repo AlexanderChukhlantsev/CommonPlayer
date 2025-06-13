@@ -18,12 +18,8 @@
         Width="800"
         
         WindowStyle="None"
-        AllowsTransparency="True"
+        AllowsTransparency="False"
         ResizeMode="CanResize">
-
-  <WindowChrome.WindowChrome>
-    <WindowChrome CornerRadius="10" GlassFrameThickness="0"/>
-  </WindowChrome.WindowChrome>
 
   <Grid>
     <Grid.RowDefinitions>
@@ -59,6 +55,7 @@
                                VerticalAlignment="Center"
                                Margin="0 5 0 0"
                                PlacementMode="BottomAndAlignLeftEdges"
+                               Foreground="{DynamicResource MaterialDesignBody}"
                                StaysOpen="False"
                                Height="40"
                                ToolTip="Нажмите, чтобы открыть меню дополнительных настроек"
@@ -86,51 +83,15 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
           </Grid.RowDefinitions>
-
-          <StackPanel Grid.Row="0"
-                      Orientation="Horizontal"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Left">
-
-            <materialDesign:PackIcon Kind="ThemeLightDark"
-                                     Margin="0 0 5 0"
-                                     VerticalAlignment="Center"/>
-
-            <TextBlock VerticalAlignment="Center"
-                       Style="{DynamicResource MaterialDesignTextBlock}"
-                       FontWeight="Medium"
-                       Padding="3 0 0 0"
-                       FontSize="14"
-                       Text="Светлая тема"
-                       ToolTip="Нажмите на переключатель справа, чтобы изменить тему"
-                       HorizontalAlignment="Left"
-                       Margin="0 0 0 3"/>
-
-            <ToggleButton Cursor="Hand" 
-                          ToolTip="Изменить тему"
-                          Margin="10 0 0 0"
-                          Style="{DynamicResource MaterialDesignSwitchLightToggleButton}"
-                          HorizontalAlignment="Right"
-                          Name="ThemeToggle"
-                          IsChecked="{Binding IsDarkThemeActive, Mode=TwoWay}"/>
-
-            <TextBlock VerticalAlignment="Center"
-                       Style="{DynamicResource MaterialDesignTextBlock}"
-                       FontWeight="Medium"
-                       Padding="3 0 0 0"
-                       FontSize="14"
-                       Text="Темная тема"
-                       ToolTip="Нажмите на переключатель слева, чтобы изменить тему"
-                       HorizontalAlignment="Left"
-                       Margin="10 0 0 0"/>
-          </StackPanel>
-
-          <Button Grid.Row="1"
+          
+          <Button Grid.Row="0"
                   Style="{DynamicResource MaterialDesignToolButton}"
+                  Foreground="{DynamicResource MaterialDesignBody}"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left">
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Stretch">
 
               <materialDesign:PackIcon Kind="HelpRhombus"
                                        Margin="0 0 5 0"
@@ -146,19 +107,20 @@
             </StackPanel>
           </Button>
 
-          <Button Grid.Row="2"
+          <Button Grid.Row="1"
                   Style="{DynamicResource MaterialDesignToolButton}"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"
+                  Foreground="{DynamicResource MaterialDesignBody}"
                   Command="{Binding AboutProgrammCommand}">
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Stretch">
 
               <materialDesign:PackIcon Kind="AboutCircle"
                                        Margin="0 0 5 0"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Foreground="{DynamicResource MaterialDesignBody}"/>
+                                       HorizontalAlignment="Left"/>
 
               <TextBlock Text="О программе"
                          Style="{DynamicResource MaterialDesignTextBlock}"
@@ -169,13 +131,15 @@
             </StackPanel>
           </Button>
 
-          <Button Grid.Row="3"
+          <Button Grid.Row="2"
                   Style="{DynamicResource MaterialDesignToolButton}"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"
+                  Foreground="{DynamicResource MaterialDesignBody}"
                   Command="{Binding OpenApplicationFolderCommand}">
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Stretch">
 
               <materialDesign:PackIcon Kind="FolderCogOutline"
                                        Margin="0 0 5 0"

@@ -28,13 +28,9 @@ namespace CommonPlayer.ViewModels
             Theme theme = paletteHelper.GetTheme();
 
             if (isDarkThemeActive)
-            {
                 theme.SetDarkTheme();
-            }
             else
-            {
                 theme.SetLightTheme();
-            }
 
             paletteHelper.SetTheme(theme);
         }

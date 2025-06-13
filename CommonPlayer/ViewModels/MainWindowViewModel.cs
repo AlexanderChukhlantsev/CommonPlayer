@@ -11,7 +11,7 @@ namespace CommonPlayer.ViewModels
     
         public MainViewModel()
         {
-        
+
         }
 
         [RelayCommand(CanExecute = nameof(CanIncrementCount))]
