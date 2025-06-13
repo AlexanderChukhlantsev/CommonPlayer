@@ -17,6 +17,8 @@ namespace CommonPlayer.ViewModels
         public MainViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
+
+            NavigateToHomeCommand();
         }
         #endregion
 
