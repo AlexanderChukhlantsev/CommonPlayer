@@ -3,36 +3,269 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:chrome="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
         xmlns:local="clr-namespace:CommonPlayer"
         xmlns:vm="clr-namespace:CommonPlayer.ViewModels"
         mc:Ignorable="d"
-        
+
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=False}"
         
         Style="{StaticResource MaterialDesignWindow}"
         
         Title="Common Player"
         Height="450"
-        Width="800">
+        Width="800"
+        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResize">
 
+  <WindowChrome.WindowChrome>
+    <WindowChrome CornerRadius="10" GlassFrameThickness="0"/>
+  </WindowChrome.WindowChrome>
 
-  
   <Grid>
     <Grid.RowDefinitions>
+      <RowDefinition Height="45"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition />
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <Menu>
-      <MenuItem Header="_File">
-        <MenuItem Header="_Clear Count" Command="{Binding ClearCountCommand}"/>
-        <Separator />
-        <MenuItem Header="E_xit" Command="{x:Static ApplicationCommands.Close}"/>
-      </MenuItem>
-    </Menu>
-    
-    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid Grid.Row="0"
+          Height="45"
+          Background="Transparent"
+          VerticalAlignment="Center"
+          HorizontalAlignment="Stretch"
+          MouseDown="Window_MouseDown"
+          MouseMove="Window_MouseMove"
+          MouseLeftButtonDown="Window_MouseLeftButtonDown"
+          MouseLeftButtonUp="Window_MouseLeftButtonUp">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="5"/>
+        <ColumnDefinition Width="40"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="40"/>
+        <ColumnDefinition Width="40"/>
+        <ColumnDefinition Width="40"/>
+        <ColumnDefinition Width="5"/>
+      </Grid.ColumnDefinitions>
+
+      <materialDesign:PopupBox Grid.Column="1"
+                               Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0 5 0 0"
+                               PlacementMode="BottomAndAlignLeftEdges"
+                               StaysOpen="False"
+                               Height="40"
+                               ToolTip="Нажмите, чтобы открыть меню дополнительных настроек"
+                               ToolTipService.ShowOnDisabled="True">
+
+        <materialDesign:PopupBox.Style>
+          <Style TargetType="materialDesign:PopupBox">
+            <Style.Triggers>
+              <Trigger Property="IsPopupOpen" Value="True">
+                <Setter Property="ToolTipService.IsEnabled" Value="False"/>
+              </Trigger>
+              <Trigger Property="IsPopupOpen" Value="False">
+                <Setter Property="ToolTipService.IsEnabled" Value="True"/>
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </materialDesign:PopupBox.Style>
+
+        <Grid Margin="16 10 16 6"
+              HorizontalAlignment="Center">
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0"
+                      Orientation="Horizontal"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left">
+
+            <materialDesign:PackIcon Kind="ThemeLightDark"
+                                     Margin="0 0 5 0"
+                                     VerticalAlignment="Center"/>
+
+            <TextBlock VerticalAlignment="Center"
+                       Style="{DynamicResource MaterialDesignTextBlock}"
+                       FontWeight="Medium"
+                       Padding="3 0 0 0"
+                       FontSize="14"
+                       Text="Светлая тема"
+                       ToolTip="Нажмите на переключатель справа, чтобы изменить тему"
+                       HorizontalAlignment="Left"
+                       Margin="0 0 0 3"/>
+
+            <ToggleButton Cursor="Hand" 
+                          ToolTip="Изменить тему"
+                          Margin="10 0 0 0"
+                          Style="{DynamicResource MaterialDesignSwitchLightToggleButton}"
+                          HorizontalAlignment="Right"
+                          Name="ThemeToggle"
+                          IsChecked="{Binding IsDarkThemeActive, Mode=TwoWay}"/>
+
+            <TextBlock VerticalAlignment="Center"
+                       Style="{DynamicResource MaterialDesignTextBlock}"
+                       FontWeight="Medium"
+                       Padding="3 0 0 0"
+                       FontSize="14"
+                       Text="Темная тема"
+                       ToolTip="Нажмите на переключатель слева, чтобы изменить тему"
+                       HorizontalAlignment="Left"
+                       Margin="10 0 0 0"/>
+          </StackPanel>
+
+          <Button Grid.Row="1"
+                  Style="{DynamicResource MaterialDesignToolButton}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left">
+
+            <StackPanel Orientation="Horizontal">
+
+              <materialDesign:PackIcon Kind="HelpRhombus"
+                                       Margin="0 0 5 0"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+
+              <TextBlock Text="Справка"
+                         Style="{DynamicResource MaterialDesignTextBlock}"
+                         FontSize="14"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         FontWeight="Medium"/>
+            </StackPanel>
+          </Button>
+
+          <Button Grid.Row="2"
+                  Style="{DynamicResource MaterialDesignToolButton}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Command="{Binding AboutProgrammCommand}">
+
+            <StackPanel Orientation="Horizontal">
+
+              <materialDesign:PackIcon Kind="AboutCircle"
+                                       Margin="0 0 5 0"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Foreground="{DynamicResource MaterialDesignBody}"/>
+
+              <TextBlock Text="О программе"
+                         Style="{DynamicResource MaterialDesignTextBlock}"
+                         FontSize="14"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         FontWeight="Medium"/>
+            </StackPanel>
+          </Button>
+
+          <Button Grid.Row="3"
+                  Style="{DynamicResource MaterialDesignToolButton}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Command="{Binding OpenApplicationFolderCommand}">
+
+            <StackPanel Orientation="Horizontal">
+
+              <materialDesign:PackIcon Kind="FolderCogOutline"
+                                       Margin="0 0 5 0"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Foreground="{DynamicResource MaterialDesignBody}"/>
+
+              <TextBlock Text="Папка приложения"
+                         Style="{DynamicResource MaterialDesignTextBlock}"
+                         FontSize="14"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         FontWeight="Medium"/>
+            </StackPanel>
+          </Button>
+        </Grid>
+      </materialDesign:PopupBox>
+
+      <StackPanel Grid.ColumnSpan="7"
+                  Grid.Row="0"
+                  Orientation="Horizontal"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+
+        <materialDesign:PackIcon Kind="RecordPlayer"
+                                 VerticalAlignment="Center"
+                                 Width="18"
+                                 Height="18"
+                                 Visibility="Collapsed"/>
+
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="2 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Common Player"
+                   FontSize="14"
+                   FontWeight="SemiBold"
+                   Cursor="Arrow"
+                   Style="{DynamicResource MaterialDesignTextBlock}"/>
+      </StackPanel>
+
+      <Button Grid.Column="3"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Style="{DynamicResource MaterialDesignIconButton}"
+              Foreground="{DynamicResource MaterialDesignBody}"
+              ToolTip="Нажмите, чтобы свернуть окно"
+              Width="30"
+              Height="30"
+              Name="MinimizeButton"
+              Click="MinimizeButton_Click">
+
+        <materialDesign:PackIcon Kind="WindowMinimize"
+                                 Width="15"
+                                 Height="15"/>
+      </Button>
+
+      <Button Grid.Column="4"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Style="{DynamicResource MaterialDesignIconButton}"
+              Foreground="{DynamicResource MaterialDesignBody}"
+              ToolTip="Нажмите, чтобы изменить размер окна"
+              Width="30"
+              Height="30"
+              Name="MaximizeButton"
+              Click="MaximizeButton_Click">
+
+        <materialDesign:PackIcon Kind="WindowMaximize"
+                                 Width="15"
+                                 Height="15"/>
+      </Button>
+
+      <Button Grid.Column="5"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Style="{DynamicResource MaterialDesignIconButton}"
+              Foreground="{DynamicResource MaterialDesignBody}"
+              ToolTip="Нажмите, чтобы закрыть окно"
+              Width="30"
+              Height="30"
+              Name="CloseButton"
+              Click="CloseButton_Click">
+
+        <materialDesign:PackIcon Kind="CloseBold"
+                                 Width="15"
+                                 Height="15"/>
+      </Button>
+    </Grid>
+
+    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
       <Image />
       <TextBlock Text="{Binding Count, StringFormat='{}{0} Clicks'}" Margin="0,10"/>
       <Button Content="_Click Me" Command="{Binding IncrementCountCommand}" />

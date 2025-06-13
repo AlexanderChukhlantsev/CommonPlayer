@@ -15,6 +15,9 @@ namespace CommonPlayer;
 /// </summary>
 public partial class App : Application
 {
+    public static readonly double MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+    public static readonly double MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
     [STAThread]
     private static void Main(string[] args)
     {
