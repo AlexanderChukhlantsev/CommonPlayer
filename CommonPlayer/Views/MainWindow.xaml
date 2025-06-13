@@ -14,8 +14,11 @@
         Style="{StaticResource MaterialDesignWindow}"
         
         Title="Common Player"
-        Height="450"
-        Width="800"
+        Height="500"
+        Width="450"
+        
+        MinHeight="500"
+        MinWidth="450"
         
         WindowStyle="None"
         AllowsTransparency="False"
@@ -24,9 +27,8 @@
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="45"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition />
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="35"/>
     </Grid.RowDefinitions>
 
     <Grid Grid.Row="0"
@@ -53,7 +55,6 @@
                                Grid.Row="0"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Margin="0 5 0 0"
                                PlacementMode="BottomAndAlignLeftEdges"
                                Foreground="{DynamicResource MaterialDesignBody}"
                                StaysOpen="False"
@@ -229,10 +230,31 @@
       </Button>
     </Grid>
 
-    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-      <Image />
-      <TextBlock Text="{Binding Count, StringFormat='{}{0} Clicks'}" Margin="0,10"/>
-      <Button Content="_Click Me" Command="{Binding IncrementCountCommand}" />
-    </StackPanel>
+    <ContentControl Grid.Row="1"
+                    Content="{Binding Path=Navigation.CurrentViewModel}"/>
+
+    <Grid Grid.Row="2"> 
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0"
+              Style="{DynamicResource MaterialDesignFlatDarkButton}"
+              Command="{Binding NavigateToHomeCommandCommand}">
+
+        <materialDesign:PackIcon Kind="Home"
+                                 Foreground="{DynamicResource MaterialDesignBody}"/>
+      </Button>
+
+      <Button Grid.Column="1"
+              Style="{DynamicResource MaterialDesignFlatDarkButton}"
+              Command="{Binding NavigateToSettingsCommandCommand}">
+
+        <materialDesign:PackIcon Kind="Settings"
+                                 Foreground="{DynamicResource MaterialDesignBody}"/>
+      </Button>
+    </Grid>
   </Grid>
 </Window>

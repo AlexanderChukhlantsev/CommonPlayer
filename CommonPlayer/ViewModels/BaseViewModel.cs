@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommonPlayer.Core.Services;
+
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 using MaterialDesignThemes.Wpf;
 
@@ -9,6 +12,13 @@ namespace CommonPlayer.ViewModels
         #region Private properties
         [ObservableProperty]
         private bool _isDarkThemeActive = false;
+        #endregion
+
+
+        #region Constructor
+        public BaseViewModel()
+        {
+        }
         #endregion
 
 

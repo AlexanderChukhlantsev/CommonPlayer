@@ -23,7 +23,9 @@ public partial class MainWindow
     {
         MaxHeight = App.MaxHeight;
         MaxWidth = App.MaxWidth;
+
         DataContext = viewModel;
+
         InitializeComponent();
 
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, OnClose));
